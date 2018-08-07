@@ -54,7 +54,8 @@ export const withNextInputAutoFocusForm = (
         if (nextFocusableInput) {
           this.inputRefs[nextFocusableInput.props.name].focus();
         } else {
-          if (submitAfterLastInput) this.props.formik.submitForm();
+          if (submitAfterLastInput && !this.props.formik.isSubmitting)
+            this.props.formik.submitForm();
         }
       },
       getReturnKeyType: name => {
