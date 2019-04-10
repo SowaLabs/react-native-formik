@@ -54,7 +54,7 @@ class PickerModal extends PureComponent<PropsType> {
     ) : (
       <View
         style={{
-          opacity: 0,
+          opacity: 0.00000001,
           position: "absolute",
           top: 0,
           bottom: 0,
