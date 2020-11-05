@@ -17,6 +17,7 @@ class PickerModal extends PureComponent<PropsType> {
   };
 
   onValueChange = (value: any) => {
+    if (value === '') return;
     if (this.props.onChangeText) this.props.onChangeText(value);
     if (this.props.onSubmitEditing) this.props.onSubmitEditing();
     if (this.props.onChangeCb) this.props.onChangeCb(value);
