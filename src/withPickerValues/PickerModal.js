@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
-import { View, Platform, Picker } from "react-native";
+import { View, Platform } from "react-native";
+import { Picker } from '@react-native-picker/picker'
 
 import KeyboardModal from "./KeyboardModal";
 import DisableKeyboard from "./DisableKeyboard";
@@ -17,19 +18,20 @@ class PickerModal extends PureComponent<PropsType> {
   };
 
   onValueChange = (value: any) => {
-    if (value === '') return;
+    // if (value === '') return;
     if (this.props.onChangeText) this.props.onChangeText(value);
     if (this.props.onSubmitEditing) this.props.onSubmitEditing();
     if (this.props.onChangeCb) this.props.onChangeCb(value);
   };
 
   renderPicker = () => {
-    const { placeholder, value, disabled } = this.props;
+    const { placeholder, value, disabled, clearable } = this.props;
     if (!this.props.values || !this.props.values.length) return null;
     const values = [...this.props.values];
     if (Platform.OS === "ios") {
       values.unshift({ value: "", label: placeholder || "" });
-    } else {
+    }
+    else if (clearable) {
       // Fix for issue: https://github.com/facebook/react-native/issues/15556
       values.unshift({ value: "", label: "" });
     }
@@ -38,7 +40,7 @@ class PickerModal extends PureComponent<PropsType> {
         onValueChange={this.onValueChange}
         selectedValue={value}
         prompt={placeholder}
-	enabled={!disabled}
+        enabled={!disabled}
       >
         {values.map(item => (
           <Picker.Item key={item.value} {...item} />
@@ -55,19 +57,19 @@ class PickerModal extends PureComponent<PropsType> {
         {picker}
       </KeyboardModal>
     ) : (
-      <View
-        style={{
-          opacity: 0.00000001,
-          position: "absolute",
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0
-        }}
-      >
-        {picker}
-      </View>
-    );
+        <View
+          style={{
+            opacity: 0.00000001,
+            position: "absolute",
+            top: 0,
+            bottom: 0,
+            right: 0,
+            left: 0
+          }}
+        >
+          {picker}
+        </View>
+      );
   };
 
   render() {
