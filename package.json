@@ -1,6 +1,6 @@
 {
   "name": "react-native-formik",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Make the most of your React Native forms with Formik",
   "main": "index.js",
   "type": "index.d.ts",

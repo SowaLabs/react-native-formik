@@ -1,13 +1,13 @@
 // @flow
 import React, { PureComponent } from "react";
 import { View, Platform } from "react-native";
-import { Picker } from '@react-native-picker/picker'
+import { Picker } from "@react-native-picker/picker";
 
 import KeyboardModal from "./KeyboardModal";
 import DisableKeyboard from "./DisableKeyboard";
 
 type PropsType = {
-  values: Array<{ label: string, value: string }>
+  values: Array<{ label: string, value: string }>,
 };
 
 class PickerModal extends PureComponent<PropsType> {
@@ -18,7 +18,7 @@ class PickerModal extends PureComponent<PropsType> {
   };
 
   onValueChange = (value: any) => {
-    // if (value === '') return;
+    if (value === "") return;
     if (this.props.onChangeText) this.props.onChangeText(value);
     if (this.props.onSubmitEditing) this.props.onSubmitEditing();
     if (this.props.onChangeCb) this.props.onChangeCb(value);
@@ -30,8 +30,7 @@ class PickerModal extends PureComponent<PropsType> {
     const values = [...this.props.values];
     if (Platform.OS === "ios") {
       values.unshift({ value: "", label: placeholder || "" });
-    }
-    else if (clearable) {
+    } else {
       // Fix for issue: https://github.com/facebook/react-native/issues/15556
       values.unshift({ value: "", label: "" });
     }
@@ -42,7 +41,7 @@ class PickerModal extends PureComponent<PropsType> {
         prompt={placeholder}
         enabled={!disabled}
       >
-        {values.map(item => (
+        {values.map((item) => (
           <Picker.Item key={item.value} {...item} />
         ))}
       </Picker>
@@ -50,26 +49,26 @@ class PickerModal extends PureComponent<PropsType> {
 
     return Platform.OS === "ios" ? (
       <KeyboardModal
-        ref={ref => {
+        ref={(ref) => {
           this.pickerModal = ref;
         }}
       >
         {picker}
       </KeyboardModal>
     ) : (
-        <View
-          style={{
-            opacity: 0.00000001,
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0
-          }}
-        >
-          {picker}
-        </View>
-      );
+      <View
+        style={{
+          opacity: 0.00000001,
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          right: 0,
+          left: 0,
+        }}
+      >
+        {picker}
+      </View>
+    );
   };
 
   render() {
