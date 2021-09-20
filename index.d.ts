@@ -20,6 +20,11 @@ export interface withTouchedProps {
   name: string;
 }
 
+export interface withFocusedProps {
+  onFocus?: () => void;
+  onBlur?: () => void;
+}
+
 export interface withFormikControlProps {
   error?: string;
   value: string;
@@ -30,7 +35,8 @@ export type makeInputGreatAgainProps = makeReactNativeFieldProps &
   setFormikInitialValueProps &
   withInputTypePropsProps &
   withErrorProps &
-  withTouchedProps;
+  withTouchedProps &
+  withFocusedProps;
 
 export function makeReactNativeField<Props>(
   WrappedComponent: React.ComponentType<Props>
@@ -53,6 +59,10 @@ export function withFormik<Props>(
 ): React.ComponentClass<Props>;
 
 export function withNextInputAutoFocusInput<Props>(
+  WrappedComponent: React.ComponentType<Props>
+): React.ComponentClass<Props>;
+
+export function withFocus<Props>(
   WrappedComponent: React.ComponentType<Props>
 ): React.ComponentClass<Props>;
 

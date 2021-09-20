@@ -7,12 +7,12 @@ const withFocusProp = WrappedInput => {
     };
 
     onBlur = () => {
-      if (this.props.onBlur) this.props.onBlur();
+      this.props.onBlur && this.props.onBlur();
       this.setState({ focused: false });
     };
 
     onFocus = () => {
-      if (this.props.onFocus) this.props.onFocus();
+      this.props.onFocus && this.props.onFocus();
       this.setState({ focused: true });
     };
 
