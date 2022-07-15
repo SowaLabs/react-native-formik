@@ -48,7 +48,8 @@ export const withNextInputAutoFocusForm = (
         const nextFocusableInput = nextInputs.find(
           element =>
             this.inputRefs[element.props.name] &&
-            this.inputRefs[element.props.name].focus
+            this.inputRefs[element.props.name].focus && 
+            !this.inputRefs[element.props.name].disabled
         );
 
         if (nextFocusableInput) {
